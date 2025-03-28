@@ -14,7 +14,7 @@ def gerar_senha(tamanho):
 def verifica_seguranca(senha):
     tamanho = len(senha)
     
-    # Verificar se a senha contém diferentes tipos de caracteres
+    # Verificar se a senha contem diferentes tipos de caracteres
     mu, mi, dgt = False, False, False
     for c in senha:
         if c.isupper():
@@ -24,17 +24,17 @@ def verifica_seguranca(senha):
         if c.isdigit():
             dgt = True
 
-    # Cálculo da entropia com base nos caracteres possíveis
+    # calculo da entropia
     if dgt and not (mi or mu):
-        entropia = math.log2(10 ** tamanho)  # Apenas números (0-9)
+        entropia = math.log2(10 ** tamanho)  # Apenas numeros (0-9)
     elif mi and not (mu or dgt):
-        entropia = math.log2(26 ** tamanho)  # Apenas minúsculas
+        entropia = math.log2(26 ** tamanho)  # Apenas minusculas
     elif mu and mi and not dgt:
-        entropia = math.log2(52 ** tamanho)  # Maiúsculas + Minúsculas
+        entropia = math.log2(52 ** tamanho)  # Maiusculas + Minusculas
     elif mu and mi and dgt:
-        entropia = math.log2(94 ** tamanho)  # Maiúsculas + Minúsculas + Dígitos + Símbolos
+        entropia = math.log2(94 ** tamanho)  # Maiusculas + Minusculas + Digitos + Simbolos
     else:
-        entropia = 0  # Caso não atenda a nenhuma categoria
+        entropia = 0
 
     return entropia
 
@@ -48,16 +48,16 @@ def main():
     rodando = True
     while rodando:
         print('\n\t<--- GERADOR DE SENHAS --->')
-        print('Digite o número do setor correspondente:')
+        print('Digite o numero do setor correspondente:')
 
         setor_nomes = list(setores.keys())  # Lista com os nomes dos setores
         for count, key in enumerate(setor_nomes):
             print(f'\t{count + 1} - {key}')
 
         try:
-            setor_index = int(input('-> ')) - 1  # Ajustando índice
+            setor_index = int(input('-> ')) - 1  # Ajustando indice
             if setor_index not in range(len(setor_nomes)):
-                print('Setor inválido! Escolha um número válido.')
+                print('Setor inválido! Escolha um numero válido.')
                 continue
         except ValueError:
             print('Digite um valor inteiro válido.')
@@ -80,12 +80,12 @@ def main():
         print('Deseja visualizar sua senha? (s/n)')
         visualizar = input('').strip().lower()
         if visualizar == 's':
-            print(f'Sua senha é:\n-> {super_secret_password}')
+            print(f'Sua senha e:\n-> {super_secret_password}')
         
-        print('Deseja saber o nível de segurança dela? (s/n)')
+        print('Deseja saber o nivel de segurança dela? (s/n)')
         visualizar = input('').strip().lower()
         if visualizar == 's':
-            print(f"O nível de segurança de sua senha:\n-> {verifica_seguranca(super_secret_password)} bits de entropia")
+            print(f"O nivel de segurança de sua senha:\n-> {verifica_seguranca(super_secret_password)} bits de entropia")
 
 if __name__ == '__main__':
     main()
