@@ -1,0 +1,13 @@
+Você agora é resposável por criar as senhas para os funcionários de uma empresa
+Após terem sofrido ataques de força bruta, o time de segurança
+decidiu que era hora de um basta, PRECISAMOS de um algoritmo que
+possa criar novas senhas seguras para evitar futuros problemas.
+
+Cada setor decidiu propor um tamanho de senha:
+    - Para Administração: 20 caracteres
+    - Para TI: 30 caracteres
+    - Para Produção: 15 caracteres
+
+Requisitos:
+    - O sistema deve receber a informação de qual o setor do funcionário
+    - O sistema deve ser capaz de gerar senhas, sejam elas (com minusculas ou maiúsculas e digitos)
