@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Senhas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Gestor de Senhas</h1>
+
+    <form id="form-senha">
+        <label for="origem">Origem da Senha:</label>
+        <input type="text" id="origem" required>
+
+        <label for="tamanho">Tamanho da Senha:</label>
+        <input type="number" id="tamanho" min="6" max="32" value="12" required>
+
+        <button type="submit">Gerar Senha</button>
+    </form>
+
+    <h2>Senhas Salvas</h2>
+    <button onclick="carregarSenhas()">Carregar Senhas</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Origem</th>
+                <th>Senha</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-senhas"></tbody>
+    </table>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
