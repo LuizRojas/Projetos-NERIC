@@ -1,44 +1,13 @@
-import math
-import string
+from gerador import Gerador
 import secrets
+import string
+import math
 
-def gerar_senha(tamanho):
-    if tamanho is None or tamanho <= 0:
-        return "Erro: tamanho inválido"
-
-    alfabeto = string.ascii_letters + string.digits + string.punctuation  # Inclui caracteres especiais
-    senha = ''.join(secrets.choice(alfabeto) for _ in range(tamanho))
-    
-    return senha
-
-def verifica_seguranca(senha):
-    tamanho = len(senha)
-    
-    # Verificar se a senha contem diferentes tipos de caracteres
-    mu, mi, dgt = False, False, False
-    for c in senha:
-        if c.isupper():
-            mu = True
-        if c.islower():
-            mi = True
-        if c.isdigit():
-            dgt = True
-
-    # calculo da entropia
-    if dgt and not (mi or mu):
-        entropia = math.log2(10 ** tamanho)  # Apenas numeros (0-9)
-    elif mi and not (mu or dgt):
-        entropia = math.log2(26 ** tamanho)  # Apenas minusculas
-    elif mu and mi and not dgt:
-        entropia = math.log2(52 ** tamanho)  # Maiusculas + Minusculas
-    elif mu and mi and dgt:
-        entropia = math.log2(94 ** tamanho)  # Maiusculas + Minusculas + Digitos + Simbolos
-    else:
-        entropia = 0
-
-    return entropia
 
 def main():
+
+    gdr = Gerador()
+
     setores = {
         'Administracao': 20,
         'TI': 30,
@@ -71,7 +40,7 @@ def main():
         tamanho_senha = setores[setor_nome]
 
         print('Gerando sua senha...')
-        super_secret_password = gerar_senha(tamanho_senha)
+        super_secret_password = gdr.gerar_senha(tamanho_senha)
 
         if super_secret_password.startswith("Erro"):
             print(super_secret_password)
@@ -85,7 +54,7 @@ def main():
         print('Deseja saber o nivel de segurança dela? (s/n)')
         visualizar = input('').strip().lower()
         if visualizar == 's':
-            print(f"O nivel de segurança de sua senha:\n-> {verifica_seguranca(super_secret_password)} bits de entropia")
+            print(f"O nivel de segurança de sua senha:\n-> {gdr.verifica_seguranca(super_secret_password)} bits de entropia")
 
 if __name__ == '__main__':
     main()
